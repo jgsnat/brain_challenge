@@ -2,7 +2,7 @@ import {
   WinstonModuleOptions,
   utilities as nestWinstonModuleUtilities,
 } from 'nest-winston';
-import winston from 'winston';
+import * as winston from 'winston';
 
 export const winstonConfig: WinstonModuleOptions = {
   levels: winston.config.npm.levels,
