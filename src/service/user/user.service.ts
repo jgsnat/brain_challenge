@@ -40,21 +40,6 @@ export class UsersService {
     return this.create(params, UserRole.USER);
   }
 
-  private async create(params, role: UserRole): Promise<User> {
-    const { email, name, password } = params;
-    const user = this.repository.create();
-    user.email = email;
-    user.name = name;
-    user.role = role;
-    user.salt = await bcrypt.genSalt();
-    user.password = await UsersService.hashPassword(password, user.salt);
-    await this.repository.save(user);
-    delete user.password;
-    delete user.salt;
-
-    return user;
-  }
-
   async updateFull(id: string, params): Promise<User> {
     const userFound = await this.findById(id);
     await this.validatePassword(params);
@@ -102,6 +87,32 @@ export class UsersService {
     const userFound = await this.findById(id);
     userFound.isActive = false;
     await this.repository.save(userFound);
+  }
+
+  async checkCredentials(params): Promise<User> {
+    const { email, password } = params;
+    const user = await this.repository.findOne({ email, isActive: true });
+
+    if (user && (await user.checkPassword(password))) {
+      return user;
+    } else {
+      return null;
+    }
+  }
+
+  private async create(params, role: UserRole): Promise<User> {
+    const { email, name, password } = params;
+    const user = this.repository.create();
+    user.email = email;
+    user.name = name;
+    user.role = role;
+    user.salt = await bcrypt.genSalt();
+    user.password = await UsersService.hashPassword(password, user.salt);
+    await this.repository.save(user);
+    delete user.password;
+    delete user.salt;
+
+    return user;
   }
 
   private static async hashPassword(password: string, salt: string): Promise<string> {
