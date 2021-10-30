@@ -35,61 +35,9 @@ export class ProducerRepository extends Repository<Producer> {
     return { list: producers, total };
   }
 
-  async findProducer(id: number): Promise<Producer> {
-    return this.findOne(id);
-  }
-
-  async createProducer(params): Promise<Producer> {
-    const { cpfCnpj, name, city, state } = params;
-    const producer = this.create();
-    producer.cpfCnpj = cpfCnpj;
-    producer.name = name;
-    producer.city = city;
-    producer.state = state;
-    await producer.save();
-
-    return producer;
-  }
-
-  async updateFullProducer(id: number, params): Promise<Producer> {
-    const { cpfCnpj, name, city, state } = params;
-    const producer = await this.findProducer(id);
-    producer.cpfCnpj = cpfCnpj;
-    producer.name = name;
-    producer.city = city;
-    producer.state = state;
-    await producer.save();
-
-    return producer;
-  }
-
-  async incrementalUpdateProducer(id: number, params): Promise<Producer> {
-    const { cpfCnpj, name, city, state } = params;
-    const producer = await this.findProducer(id);
-
-    if (cpfCnpj !== undefined) {
-      producer.cpfCnpj = cpfCnpj;
-    }
-
-    if (name !== undefined || name !== '') {
-      producer.name = name;
-    }
-
-    if (city !== undefined || city !== '') {
-      producer.city = city;
-    }
-
-    if (state !== undefined || state !== '') {
-      producer.state = state;
-    }
-    await producer.save();
-
-    return producer;
-  }
-
-  async deleteProducer(id: number): Promise<void> {
-    const producer = await this.findProducer(id);
-    producer.isActive = false;
-    await producer.save();
+  async findProducerByCpfCnpj(cpfCnpj: number): Promise<Producer> {
+    const query = this.createQueryBuilder('producer');
+    query.where('producer.cpfCnpj = :cpfCnpj', { cpfCnpj });
+    return query.getOne();
   }
 }
