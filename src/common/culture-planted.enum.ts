@@ -1,4 +1,4 @@
-export enum UserRole {
+export enum CulturePlanted {
   SOJA = 'SOJA',
   MILHO = 'MILHO',
   ALGODAO = 'ALGODAO',

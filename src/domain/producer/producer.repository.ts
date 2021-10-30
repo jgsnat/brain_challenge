@@ -1,16 +1,14 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Producer } from './producer.entity';
+import { clearQueryParams } from '../../common/base-query-parameters.dto';
 
 @EntityRepository(Producer)
 export class ProducerRepository extends Repository<Producer> {
   async findProducers(queryParams): Promise<{ list: Producer[]; total: number }> {
-    queryParams.status = queryParams.status === undefined ? true : queryParams.status;
-    queryParams.page = queryParams.page < 1 || queryParams.page === undefined ? 1 : queryParams.page;
-    queryParams.limit = queryParams.limit > 100 || queryParams.limit === undefined ? 100 : queryParams.limit;
-
-    const { cpfCnpj, name, city, state, status } = queryParams;
+    clearQueryParams(queryParams);
+    const { cpfCnpj, name, city, state, isActive } = queryParams;
     const query = this.createQueryBuilder('producer');
-    query.where('producer.isActive = :status', { status });
+    query.where('producer.isActive = :isActive', { isActive });
 
     if (cpfCnpj) {
       query.andWhere('producer.cpfCnpj = :cpfCnpj', { cpfCnpj });
