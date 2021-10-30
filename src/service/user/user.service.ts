@@ -2,11 +2,11 @@ import { ConflictException, Injectable, NotFoundException, UnprocessableEntityEx
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from '../../domain/user/user.repository';
 import { User } from '../../domain/user/user.entity';
-import { UserRole } from '../../common/user-role.enum';
+import { UserRole } from '../../common/auth/user-role.enum';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     @InjectRepository(UserRepository)
     private repository: UserRepository,
@@ -48,7 +48,7 @@ export class UsersService {
     userFound.name = name;
     userFound.role = role;
     userFound.salt = await bcrypt.genSalt();
-    userFound.password = await UsersService.hashPassword(password, userFound.salt);
+    userFound.password = await this.hashPassword(password, userFound.salt);
     await this.repository.save(userFound);
     delete userFound.password;
     delete userFound.salt;
@@ -74,7 +74,7 @@ export class UsersService {
 
     if (password !== undefined || password !== '') {
       userFound.salt = await bcrypt.genSalt();
-      userFound.password = await UsersService.hashPassword(password, userFound.salt);
+      userFound.password = await this.hashPassword(password, userFound.salt);
     }
     await this.repository.save(userFound);
     delete userFound.password;
@@ -107,7 +107,7 @@ export class UsersService {
     user.name = name;
     user.role = role;
     user.salt = await bcrypt.genSalt();
-    user.password = await UsersService.hashPassword(password, user.salt);
+    user.password = await this.hashPassword(password, user.salt);
     await this.repository.save(user);
     delete user.password;
     delete user.salt;
@@ -115,7 +115,7 @@ export class UsersService {
     return user;
   }
 
-  private static async hashPassword(password: string, salt: string): Promise<string> {
+  private async hashPassword(password: string, salt: string): Promise<string> {
     return bcrypt.hash(password, salt);
   }
 

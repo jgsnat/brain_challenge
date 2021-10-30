@@ -5,11 +5,15 @@ import { WinstonModule } from 'nest-winston';
 import { winstonConfig } from './config/winston.config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggerInterceptor } from './interceptors/logger.interceptor';
+import { AuthModule } from './modules/auth.module';
+import { UserModule } from './modules/user.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeormConfig),
     WinstonModule.forRoot(winstonConfig),
+    UserModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [
