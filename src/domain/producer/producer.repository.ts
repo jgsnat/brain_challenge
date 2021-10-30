@@ -16,15 +16,15 @@ export class ProducerRepository extends Repository<Producer> {
       query.andWhere('producer.cpfCnpj = :cpfCnpj', { cpfCnpj });
     }
 
-    if (name) {
+    if (name && name != '') {
       query.andWhere('producer.name ILIKE :name', { name: `%${name}%` });
     }
 
-    if (city) {
+    if (city && city != '') {
       query.andWhere('producer.city ILIKE :city', { city: `%${city}%` });
     }
 
-    if (state) {
+    if (state && state != '') {
       query.andWhere('producer.state ILIKE :state', { state: `%${state}%` });
     }
     query.skip((queryParams.page - 1) * queryParams.limit);
