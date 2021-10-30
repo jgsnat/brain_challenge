@@ -1,5 +1,6 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { EntityAbstract } from '../../common/entity.abstract';
+import { Producer } from '../producer/producer.entity';
 
 @Entity()
 export class Farm extends EntityAbstract {
@@ -23,4 +24,7 @@ export class Farm extends EntityAbstract {
 
   @Column({ nullable: false, type: 'varchar', array: true })
   culturePlanted: string[];
+
+  @ManyToOne(() => Producer, producer => producer.farms)
+  producer: Producer;
 }
