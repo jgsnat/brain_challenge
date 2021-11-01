@@ -7,12 +7,14 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggerInterceptor } from './interceptors/logger.interceptor';
 import { AuthModule } from './modules/auth.module';
 import { UserModule } from './modules/user.module';
+import { ProducerModule } from './modules/producer.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeormConfig),
     WinstonModule.forRoot(winstonConfig),
     UserModule,
+    ProducerModule,
     AuthModule,
   ],
   controllers: [],

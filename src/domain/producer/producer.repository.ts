@@ -4,7 +4,7 @@ import { clearQueryParams } from '../../common/base-query-parameters.dto';
 
 @EntityRepository(Producer)
 export class ProducerRepository extends Repository<Producer> {
-  async findProducers(queryParams): Promise<{ list: Producer[]; total: number }> {
+  async findAll(queryParams): Promise<{ list: Producer[]; total: number }> {
     clearQueryParams(queryParams);
     const { cpfCnpj, name, city, state, isActive } = queryParams;
     const query = this.createQueryBuilder('producer');
@@ -33,7 +33,7 @@ export class ProducerRepository extends Repository<Producer> {
     return { list: producers, total };
   }
 
-  async findProducerByCpfCnpj(cpfCnpj: number): Promise<Producer> {
+  async findProducerByCpfCnpj(cpfCnpj: string): Promise<Producer> {
     const query = this.createQueryBuilder('producer');
     query.where('producer.cpfCnpj = :cpfCnpj', { cpfCnpj });
     return query.getOne();
