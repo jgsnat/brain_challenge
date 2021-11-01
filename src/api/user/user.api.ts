@@ -17,11 +17,11 @@ import { RolesGuard } from '../../common/auth/roles.guard';
 import { UserService } from '../../service/user/user.service';
 import { Role } from '../../common/auth/role.decorator';
 import { UserRole } from '../../common/auth/user-role.enum';
-import { CreateUserDto } from '../dtos/create-user.dto';
+import { CreateUserDto } from '../dtos/user/create-user.dto';
 import { User } from '../../domain/user/user.entity';
 import { GetUser } from '../../common/auth/get-user.decorator';
-import { FindUsersQueryDto } from '../dtos/find-users-query.dto';
-import { UpdateUserDto } from '../dtos/update-user.dto';
+import { FindUsersQueryDto } from '../dtos/user/find-users-query.dto';
+import { UpdateUserDto } from '../dtos/user/update-user.dto';
 
 @Controller('user')
 @UseGuards(AuthGuard(), RolesGuard)

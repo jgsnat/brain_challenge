@@ -1,6 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
+import { UserRole } from './user-role.enum';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -16,6 +17,6 @@ export class RolesGuard implements CanActivate {
 
     if (!requiredRole) return true;
 
-    return userRole === requiredRole;
+    return userRole === requiredRole || userRole === UserRole.ADMIN;
   }
 }
