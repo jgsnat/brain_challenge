@@ -60,19 +60,19 @@ export class UserService {
     const userFound = await this.findById(id);
     await this.validatePassword(params);
     const { email, name, password, role } = params;
-    if (email !== undefined || email !== '') {
+    if (email) {
       userFound.email = email;
     }
 
-    if (name !== undefined || name !== '') {
+    if (name) {
       userFound.name = name;
     }
 
-    if (role !== undefined || role !== '') {
+    if (role) {
       userFound.role = role;
     }
 
-    if (password !== undefined || password !== '') {
+    if (password) {
       userFound.salt = await bcrypt.genSalt();
       userFound.password = await this.hashPassword(password, userFound.salt);
     }
@@ -121,7 +121,7 @@ export class UserService {
 
   private async validateParams(params): Promise<void> {
     await this.validatePassword(params);
-    const user = await this.repository.findUserByEmail(params.email.trim);
+    const user = await this.repository.findUserByEmail(params.email);
     if (user) {
       throw new ConflictException('Email address is already in use');
     }

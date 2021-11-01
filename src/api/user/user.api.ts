@@ -49,13 +49,13 @@ export class UserApi {
   @Put(':id')
   async fullUpdate(@Body(ValidationPipe) userDto: UpdateUserDto, @GetUser() user: User, @Param('id') id: string) {
     this.validationAuthorization(user, id);
-    return this.service.updateFull(id, user);
+    return this.service.updateFull(id, userDto);
   }
 
   @Patch(':id')
   async incrementalUpdate(@Body(ValidationPipe) userDto: UpdateUserDto, @GetUser() user: User, @Param('id') id: string) {
     this.validationAuthorization(user, id);
-    return this.service.updateIncremental(id, user);
+    return this.service.updateIncremental(id, userDto);
   }
 
   @Delete(':id')

@@ -5,11 +5,16 @@ import { CredentialsDto } from '../dtos/credentials.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../../common/auth/get-user.decorator';
 import { User } from '../../domain/user/user.entity';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('auth')
+@ApiTags('Authorization API')
 export class AuthApi {
   constructor(private service: AuthService) {}
 
+  @ApiOkResponse({
+    description: 'Apply successfully',
+  })
   @Post('/signup')
   async signUp(@Body(ValidationPipe) userDto: CreateUserDto): Promise<{ message: string }> {
     await this.service.signUp(userDto);
@@ -20,10 +25,8 @@ export class AuthApi {
 
   @Post('/signin')
   async signIn(@Body(ValidationPipe) credentials: CredentialsDto): Promise<{ token: string }> {
-    await this.service.signIn(credentials);
-    return {
-      token: 'Successful registration',
-    };
+    const token = await this.service.signIn(credentials);
+    return { token };
   }
 
   @Get('/me')
