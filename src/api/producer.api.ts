@@ -21,15 +21,27 @@ import { CreateProducerDto } from './dtos/producer/create-producer.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../common/auth/roles.guard';
 import { UpdateProducerDto } from './dtos/producer/update-producer.dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('producer')
 @UseGuards(AuthGuard(), RolesGuard)
+@ApiTags('Producer API')
 export class ProducerApi {
   constructor(private service: ProducerService) {}
 
   @Get()
   @Role(UserRole.USER)
   @HttpCode(206)
+  @ApiResponse({
+    status: 206,
+    description: 'Retorna a lista de produtores paginada.',
+  })
+  @ApiResponse({
+    status: 404,
+    description:
+      'Retorna caso não seja encontrado nenhum recurso com os parâmetros passados',
+  })
+  @ApiOperation({ description: 'Listagem de todos os produtores paginada' })
   async findAll(
     @Query() queryDto: FindProducersQueryDto,
   ): Promise<{ list: Producer[]; total: number }> {
@@ -39,6 +51,17 @@ export class ProducerApi {
   @Get(':id')
   @Role(UserRole.USER)
   @HttpCode(200)
+  @ApiResponse({
+    status: 200,
+    description: 'Retorna um produtor.',
+    type: Producer,
+  })
+  @ApiResponse({
+    status: 404,
+    description:
+      'Retorna caso não seja encontrado nenhum recurso com os parâmetros passados',
+  })
+  @ApiOperation({ description: 'Retornar um o produtor.' })
   async findOne(@Param('id') id): Promise<Producer> {
     return this.service.findById(id);
   }
@@ -46,6 +69,16 @@ export class ProducerApi {
   @Post()
   @Role(UserRole.USER)
   @HttpCode(201)
+  @ApiResponse({
+    status: 201,
+    description: 'Retorna o produtor criado com sucesso.',
+    type: Producer,
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'Retorna caso seja passado um e-mail já cadastrado na base',
+  })
+  @ApiOperation({ description: 'Criação de produtores' })
   async create(
     @Body(ValidationPipe) producerDto: CreateProducerDto,
   ): Promise<Producer> {
@@ -55,6 +88,17 @@ export class ProducerApi {
   @Put(':id')
   @Role(UserRole.USER)
   @HttpCode(200)
+  @ApiResponse({
+    status: 200,
+    description: 'Retorna o produtor atualizado com sucesso.',
+    type: Producer,
+  })
+  @ApiResponse({
+    status: 404,
+    description:
+      'Retorna caso não seja encontrado nenhum recurso com os parâmetros passados',
+  })
+  @ApiOperation({ description: 'Atualização de todos os dados de um produtor' })
   async fullUpdate(
     @Body(ValidationPipe) producerDto: UpdateProducerDto,
     @Param('id') id: number,
@@ -65,6 +109,19 @@ export class ProducerApi {
   @Patch(':id')
   @Role(UserRole.USER)
   @HttpCode(200)
+  @ApiResponse({
+    status: 200,
+    description: 'Retorna o produtor atualizado com sucesso.',
+    type: Producer,
+  })
+  @ApiResponse({
+    status: 404,
+    description:
+      'Retorna caso não seja encontrado nenhum recurso com os parâmetros passados',
+  })
+  @ApiOperation({
+    description: 'Atualização de informações passadas para um produtor',
+  })
   async incrementalUpdate(
     @Body(ValidationPipe) producerDto: UpdateProducerDto,
     @Param('id') id: number,
@@ -75,6 +132,18 @@ export class ProducerApi {
   @Delete(':id')
   @Role(UserRole.USER)
   @HttpCode(204)
+  @ApiResponse({
+    status: 204,
+    description: 'Retorna caso o produtor tenha sido deletado com sucesso.',
+  })
+  @ApiResponse({
+    status: 404,
+    description:
+      'Retorna caso não seja encontrado nenhum recurso com os parâmetros passados',
+  })
+  @ApiOperation({
+    description: 'Exclusão (lógica) de um produtor',
+  })
   async delete(@Param('id') id: number): Promise<void> {
     await this.service.delete(id);
   }
