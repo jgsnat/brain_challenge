@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Patch,
   Post,
@@ -28,6 +29,7 @@ export class ProducerApi {
 
   @Get()
   @Role(UserRole.USER)
+  @HttpCode(206)
   async findAll(
     @Query() queryDto: FindProducersQueryDto,
   ): Promise<{ list: Producer[]; total: number }> {
@@ -36,12 +38,14 @@ export class ProducerApi {
 
   @Get(':id')
   @Role(UserRole.USER)
+  @HttpCode(200)
   async findOne(@Param('id') id): Promise<Producer> {
     return this.service.findById(id);
   }
 
   @Post()
   @Role(UserRole.USER)
+  @HttpCode(201)
   async create(
     @Body(ValidationPipe) producerDto: CreateProducerDto,
   ): Promise<Producer> {
@@ -50,6 +54,7 @@ export class ProducerApi {
 
   @Put(':id')
   @Role(UserRole.USER)
+  @HttpCode(200)
   async fullUpdate(
     @Body(ValidationPipe) producerDto: UpdateProducerDto,
     @Param('id') id: number,
@@ -59,6 +64,7 @@ export class ProducerApi {
 
   @Patch(':id')
   @Role(UserRole.USER)
+  @HttpCode(200)
   async incrementalUpdate(
     @Body(ValidationPipe) producerDto: UpdateProducerDto,
     @Param('id') id: number,
@@ -68,7 +74,8 @@ export class ProducerApi {
 
   @Delete(':id')
   @Role(UserRole.USER)
+  @HttpCode(204)
   async delete(@Param('id') id: number): Promise<void> {
-    return this.service.delete(id);
+    await this.service.delete(id);
   }
 }

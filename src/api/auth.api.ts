@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
   Post,
   UseGuards,
   ValidationPipe,
@@ -23,6 +24,7 @@ export class AuthApi {
     description: 'Apply successfully',
   })
   @Post('/signup')
+  @HttpCode(201)
   async signUp(
     @Body(ValidationPipe) userDto: CreateUserDto,
   ): Promise<{ message: string }> {
@@ -33,6 +35,7 @@ export class AuthApi {
   }
 
   @Post('/signin')
+  @HttpCode(200)
   async signIn(
     @Body(ValidationPipe) credentials: CredentialsDto,
   ): Promise<{ token: string }> {
@@ -42,6 +45,7 @@ export class AuthApi {
 
   @Get('/me')
   @UseGuards(AuthGuard())
+  @HttpCode(200)
   getMe(@GetUser() user: User): User {
     return user;
   }

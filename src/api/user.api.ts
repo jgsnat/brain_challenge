@@ -4,6 +4,7 @@ import {
   Delete,
   ForbiddenException,
   Get,
+  HttpCode,
   Param,
   Patch,
   Post,
@@ -30,6 +31,7 @@ export class UserApi {
 
   @Get()
   @Role(UserRole.ADMIN)
+  @HttpCode(206)
   async findAll(
     @Query() queryDto: FindUsersQueryDto,
   ): Promise<{ list: User[]; total: number }> {
@@ -38,17 +40,20 @@ export class UserApi {
 
   @Get(':id')
   @Role(UserRole.ADMIN)
+  @HttpCode(200)
   async findOne(@Param('id') id): Promise<User> {
     return this.service.findById(id);
   }
 
   @Post()
   @Role(UserRole.ADMIN)
+  @HttpCode(201)
   async create(@Body(ValidationPipe) userDto: CreateUserDto): Promise<User> {
     return this.service.createAdminUser(userDto);
   }
 
   @Put(':id')
+  @HttpCode(200)
   async fullUpdate(
     @Body(ValidationPipe) userDto: UpdateUserDto,
     @GetUser() user: User,
@@ -59,6 +64,7 @@ export class UserApi {
   }
 
   @Patch(':id')
+  @HttpCode(200)
   async incrementalUpdate(
     @Body(ValidationPipe) userDto: UpdateUserDto,
     @GetUser() user: User,
@@ -69,9 +75,10 @@ export class UserApi {
   }
 
   @Delete(':id')
+  @HttpCode(204)
   @Role(UserRole.ADMIN)
   async delete(@Param('id') id: string): Promise<void> {
-    return this.service.delete(id);
+    await this.service.delete(id);
   }
 
   private validationAuthorization(user: User, id: string) {
