@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
+import { CreateFarmDto } from './create-farm.dto';
 
 export class UpdateProducerDto {
   @ApiProperty()
@@ -17,4 +18,8 @@ export class UpdateProducerDto {
   @ApiProperty()
   @IsOptional()
   state: string;
+
+  @ApiProperty()
+  @IsOptional()
+  farms: CreateFarmDto[];
 }

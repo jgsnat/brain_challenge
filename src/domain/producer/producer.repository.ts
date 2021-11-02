@@ -7,7 +7,7 @@ export class ProducerRepository extends Repository<Producer> {
   async findAll(queryParams): Promise<{ list: Producer[]; total: number }> {
     clearQueryParams(queryParams);
     const { cpfCnpj, name, city, state, isActive } = queryParams;
-    const query = this.createQueryBuilder('producer');
+    const query = this.createQueryBuilder('producer').leftJoinAndSelect('producer.farms', 'farms');
     query.where('producer.isActive = :isActive', { isActive });
 
     if (cpfCnpj) {

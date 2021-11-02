@@ -2,12 +2,14 @@ import { ConflictException, Injectable, NotFoundException } from '@nestjs/common
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProducerRepository } from '../../domain/producer/producer.repository';
 import { Producer } from '../../domain/producer/producer.entity';
+import { FarmService } from '../farm.service';
 
 @Injectable()
 export class ProducerService {
   constructor(
     @InjectRepository(ProducerRepository)
     private repository: ProducerRepository,
+    private farmService: FarmService,
   ) {}
 
   async findAll(params): Promise<{ list: Producer[]; total: number }> {
@@ -20,7 +22,10 @@ export class ProducerService {
   }
 
   async findById(id: number): Promise<Producer> {
-    const producer = await this.repository.findOne(id);
+    const producer = await this.repository.findOne({
+      where: { id },
+      relations: ['farms'],
+    });
     if (!producer) throw new NotFoundException('Producer not found');
 
     return producer;
@@ -28,32 +33,36 @@ export class ProducerService {
 
   async create(params): Promise<Producer> {
     await this.cpfCnpjExists(params.cpfCnpj);
-    const { cpfCnpj, name, city, state } = params;
+    const { cpfCnpj, name, city, state, farms } = params;
     const producer = this.repository.create();
     producer.cpfCnpj = cpfCnpj;
     producer.name = name;
     producer.city = city;
     producer.state = state;
+    producer.farms = farms;
     await this.repository.save(producer);
+    await this.farmService.createFarms(producer, farms);
 
     return producer;
   }
 
   async updateFull(id: number, params): Promise<Producer> {
     const producerFound = await this.findById(id);
-    const { cpfCnpj, name, city, state } = params;
+    const { cpfCnpj, name, city, state, farms } = params;
     producerFound.cpfCnpj = cpfCnpj;
     producerFound.name = name;
     producerFound.city = city;
     producerFound.state = state;
     await this.repository.save(producerFound);
+    await this.farmService.updateFarms(producerFound, farms);
+    producerFound.farms = farms;
 
     return producerFound;
   }
 
   async updateIncremental(id: number, params): Promise<Producer> {
     const producerFound = await this.findById(id);
-    const { cpfCnpj, name, city, state } = params;
+    const { cpfCnpj, name, city, state, farms } = params;
     if (cpfCnpj) {
       producerFound.cpfCnpj = cpfCnpj;
     }
@@ -70,6 +79,11 @@ export class ProducerService {
       producerFound.state = state;
     }
     await this.repository.save(producerFound);
+
+    if (farms && farms.length > 0) {
+      await this.farmService.updateFarms(producerFound, farms);
+    }
+    producerFound.farms = farms;
 
     return producerFound;
   }
