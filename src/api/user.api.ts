@@ -10,18 +10,18 @@ import {
   Put,
   Query,
   UseGuards,
-  ValidationPipe
+  ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from '../../common/auth/roles.guard';
-import { UserService } from '../../service/user/user.service';
-import { Role } from '../../common/auth/role.decorator';
-import { UserRole } from '../../common/auth/user-role.enum';
-import { CreateUserDto } from '../dtos/user/create-user.dto';
-import { User } from '../../domain/user/user.entity';
-import { GetUser } from '../../common/auth/get-user.decorator';
-import { FindUsersQueryDto } from '../dtos/user/find-users-query.dto';
-import { UpdateUserDto } from '../dtos/user/update-user.dto';
+import { RolesGuard } from '../common/auth/roles.guard';
+import { UserService } from '../service/user.service';
+import { Role } from '../common/auth/role.decorator';
+import { UserRole } from '../common/auth/user-role.enum';
+import { CreateUserDto } from './dtos/user/create-user.dto';
+import { User } from '../domain/user/user.entity';
+import { GetUser } from '../common/auth/get-user.decorator';
+import { FindUsersQueryDto } from './dtos/user/find-users-query.dto';
+import { UpdateUserDto } from './dtos/user/update-user.dto';
 
 @Controller('user')
 @UseGuards(AuthGuard(), RolesGuard)
@@ -30,7 +30,9 @@ export class UserApi {
 
   @Get()
   @Role(UserRole.ADMIN)
-  async findAll(@Query() queryDto: FindUsersQueryDto): Promise<{ list: User[]; total: number }> {
+  async findAll(
+    @Query() queryDto: FindUsersQueryDto,
+  ): Promise<{ list: User[]; total: number }> {
     return this.service.findAll(queryDto);
   }
 
@@ -47,13 +49,21 @@ export class UserApi {
   }
 
   @Put(':id')
-  async fullUpdate(@Body(ValidationPipe) userDto: UpdateUserDto, @GetUser() user: User, @Param('id') id: string) {
+  async fullUpdate(
+    @Body(ValidationPipe) userDto: UpdateUserDto,
+    @GetUser() user: User,
+    @Param('id') id: string,
+  ) {
     this.validationAuthorization(user, id);
     return this.service.updateFull(id, userDto);
   }
 
   @Patch(':id')
-  async incrementalUpdate(@Body(ValidationPipe) userDto: UpdateUserDto, @GetUser() user: User, @Param('id') id: string) {
+  async incrementalUpdate(
+    @Body(ValidationPipe) userDto: UpdateUserDto,
+    @GetUser() user: User,
+    @Param('id') id: string,
+  ) {
     this.validationAuthorization(user, id);
     return this.service.updateIncremental(id, userDto);
   }
@@ -66,7 +76,9 @@ export class UserApi {
 
   private validationAuthorization(user: User, id: string) {
     if (user.role != UserRole.ADMIN && user.id.toString() != id) {
-      throw new ForbiddenException('You are not authorized to access this feature');
+      throw new ForbiddenException(
+        'You are not authorized to access this feature',
+      );
     }
   }
 }

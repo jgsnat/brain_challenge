@@ -25,6 +25,6 @@ export class Farm extends EntityAbstract {
   @Column({ nullable: false, type: 'varchar', array: true })
   culturePlanted: string[];
 
-  @ManyToOne(() => Producer, producer => producer.farms)
+  @ManyToOne(() => Producer, (producer) => producer.farms)
   producer: Producer;
 }

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
-import { UserService } from '../service/user/user.service';
+import { UserService } from '../service/user.service';
 import { UserRepository } from '../domain/user/user.repository';
-import { UserApi } from '../api/user/user.api';
+import { UserApi } from '../api/user.api';
 
 @Module({
   imports: [

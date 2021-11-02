@@ -1,8 +1,13 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ProducerRepository } from '../../domain/producer/producer.repository';
-import { Producer } from '../../domain/producer/producer.entity';
-import { FarmService } from '../farm.service';
+import { ProducerRepository } from '../domain/producer/producer.repository';
+import { Producer } from '../domain/producer/producer.entity';
+import { FarmService } from './farm.service';
 
 @Injectable()
 export class ProducerService {
@@ -80,8 +85,12 @@ export class ProducerService {
     }
     await this.repository.save(producerFound);
 
-    if (farms && farms.length > 0) {
-      await this.farmService.updateFarms(producerFound, farms);
+    if (farms) {
+      if (farms.length > 0) {
+        await this.farmService.updateFarms(producerFound, farms);
+      } else {
+        throw new UnprocessableEntityException('Passwords do not match');
+      }
     }
     producerFound.farms = farms;
 

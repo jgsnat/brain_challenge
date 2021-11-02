@@ -26,7 +26,15 @@ export class FarmService {
 
   private async create(producer, params): Promise<void> {
     const farm = this.repository.create();
-    const { name, city, state, totalArea, totalAreaArable, totalAreaVegetation, culturePlanted } = params;
+    const {
+      name,
+      city,
+      state,
+      totalArea,
+      totalAreaArable,
+      totalAreaVegetation,
+      culturePlanted,
+    } = params;
     farm.name = name;
     farm.city = city;
     farm.state = state;

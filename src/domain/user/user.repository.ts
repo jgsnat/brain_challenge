@@ -24,7 +24,13 @@ export class UserRepository extends Repository<User> {
     query.skip((queryParams.page - 1) * queryParams.limit);
     query.take(+queryParams.limit);
     query.orderBy(queryParams.sort ? JSON.parse(queryParams.sort) : undefined);
-    query.select(['user.id', 'user.name', 'user.email', 'user.role', 'user.isActive']);
+    query.select([
+      'user.id',
+      'user.name',
+      'user.email',
+      'user.role',
+      'user.isActive',
+    ]);
     const [users, total] = await query.getManyAndCount();
 
     return { list: users, total };

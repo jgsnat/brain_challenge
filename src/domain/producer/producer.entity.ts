@@ -17,6 +17,6 @@ export class Producer extends EntityAbstract {
   @Column({ nullable: true, type: 'varchar', length: 2 })
   state: string;
 
-  @OneToMany(() => Farm, farm => farm.producer)
+  @OneToMany(() => Farm, (farm) => farm.producer)
   farms: Farm[];
 }
