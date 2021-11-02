@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Desafio de cadastro de produtores rurais usando [Nest](https://github.com/nestjs/nest) framework.
 
 ## Installation
 
@@ -32,7 +32,22 @@
 $ npm install
 ```
 
-## Running the app
+## Importante para a execução do projeto
+
+O projeto está configurado para rodar conectado ao banco de dados Postgresql.
+Para rodar o projeto, seja em ambiente de desenvolvimento ou no ambiente de produção. É necessário informar algumas variáveis de ambiente conforme a seguir:
+
+```
+# host do banco de dados -----------------------------> TYPEORM_HOST
+# porta do banco de dados ----------------------------> TYPEORM_PORT
+# nome de usuário para acesso ao banco de dados ------> TYPEORM_USERNAME
+# senha do usuário para acesso ao bando de dados -----> TYPEORM_PASSWORD
+# nome da base de dados ------------------------------> TYPEORM_DATABASE
+# é para sincronizar as modificações nas entitys -----> TYPEORM_SYNCHRONIZE
+# código secreto para uso na validação do token JWT --> TOP_SECRET
+```
+
+## Running the app(environment develop)
 
 ```bash
 # development
@@ -60,13 +75,12 @@ $ npm run test:cov
 
 ## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Para ter acesso ao swagger da aplicação basta acessar [Swagger](http://localhost:3000/swagger). Está neste projeto as collections do postman para mais facilidade na análise dos recursos.
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Jefferson Silva](jgsnat@gmail.com)
+
 
 ## License
 
