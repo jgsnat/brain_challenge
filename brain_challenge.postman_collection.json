@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "ee4afed7-898d-41af-b8b3-5a90f085fafb",
+		"name": "brain_challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "SignUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Usuário teste\",\n    \"email\": \"teste@teste.com\",\n    \"password\": \"12345\",\n    \"passwordConfirmation\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{brain_api}}/auth/signup",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"teste@teste.com\",\n    \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{brain_api}}/auth/signin",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{brain_api}}/auth/me",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{brain_api}}/user",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{brain_api}}/user/fade5fc5-36e2-48ad-9b80-f28af42c1964",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"user",
+								"fade5fc5-36e2-48ad-9b80-f28af42c1964"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"teste2@teste.com\",\n    \"name\": \"Teste 2\",\n    \"password\": \"string\",\n    \"passwordConfirmation\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{brain_api}}/user",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Full update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"teste4@teste.com\",\n    \"name\": \"Teste 2\",\n    \"password\": \"string2\",\n    \"role\": \"ADMIN\",\n    \"passwordConfirmation\": \"string2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{brain_api}}/user/bfef5621-0b65-418c-894a-be7b124c58cd",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"user",
+								"bfef5621-0b65-418c-894a-be7b124c58cd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Incremental update user",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role\": \"ADMIN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{brain_api}}/user/bfef5621-0b65-418c-894a-be7b124c58cd",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"user",
+								"bfef5621-0b65-418c-894a-be7b124c58cd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{brain_api}}/user/bfef5621-0b65-418c-894a-be7b124c58cd",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"user",
+								"bfef5621-0b65-418c-894a-be7b124c58cd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "producer",
+			"item": [
+				{
+					"name": "Get all producer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{brain_api}}/producer",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"producer"
+							],
+							"query": [
+								{
+									"key": "isActive",
+									"value": "false",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one producer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{brain_api}}/producer/1",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"producer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create producer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpfCnpj\": \"09385103000191\",\n    \"name\": \"Produtor 1\",\n    \"city\": \"Natal\",\n    \"state\": \"RN\",\n    \"farms\": [\n        {\n            \"name\": \"farm 1\",\n            \"city\": \"Natal\",\n            \"state\": \"RN\",\n            \"totalArea\": \"100.00\",\n            \"totalAreaArable\": \"12871\",\n            \"totalAreaVegetation\": \"182812\",\n            \"culturePlanted\": [\n                \"SOJA\",\n                \"MILHO\"\n            ]\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{brain_api}}/producer",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"producer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Full update producer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpfCnpj\": \"97743533000128\",\n    \"name\": \"Produtor 1\",\n    \"city\": \"Natal\",\n    \"state\": \"RN\",\n    \"farms\": [\n        {\n            \"name\": \"farm 1\",\n            \"city\": \"Natal\",\n            \"state\": \"RN\",\n            \"totalArea\": \"100.00\",\n            \"totalAreaArable\": \"12871\",\n            \"totalAreaVegetation\": \"182812\",\n            \"culturePlanted\": [\n                \"SOJA\",\n                \"MILHO\"\n            ]\n        },\n        {\n            \"name\": \"farm 2\",\n            \"city\": \"São Paulo\",\n            \"state\": \"SP\",\n            \"totalArea\": \"1010.00\",\n            \"totalAreaArable\": \"12871\",\n            \"totalAreaVegetation\": \"182812\",\n            \"culturePlanted\": [\n                \"SOJA\"\n            ]\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{brain_api}}/producer/1",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"producer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Incremental update producer",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"city\": \"São Paulo\",\n   \"state\": \"SP\",\n   \"farms\": [\n        {\n            \"name\": \"farm 1\",\n            \"city\": \"Natal\",\n            \"state\": \"RN\",\n            \"totalArea\": \"100.00\",\n            \"totalAreaArable\": \"12871\",\n            \"totalAreaVegetation\": \"182812\",\n            \"culturePlanted\": [\n                \"SOJA\",\n                \"MILHO\"\n            ]\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{brain_api}}/producer/1",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"producer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete producer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{brain_api}}/producer/1",
+							"host": [
+								"{{brain_api}}"
+							],
+							"path": [
+								"producer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImZhZGU1ZmM1LTM2ZTItNDhhZC05YjgwLWYyOGFmNDJjMTk2NCIsImlhdCI6MTYzNTg4MTE0MCwiZXhwIjoxNjM1ODk5MTQwfQ.V0lOzRUfT7tCnJspLvXMLKwRNtMvUM23OGqBTQzxlwg",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
