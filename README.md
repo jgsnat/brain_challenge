@@ -75,7 +75,7 @@ $ npm run test:cov
 
 ## Support
 
-Para ter acesso ao swagger da aplicação basta acessar [Swagger](http://localhost:3000/swagger). Está neste projeto as collections do postman para mais facilidade na análise dos recursos.
+Para ter acesso ao swagger da aplicação basta acessar [Swagger](http://localhost:3000/swagger). Está neste projeto as collections do postman para maior facilidade na análise dos recursos.
 
 ## Stay in touch
 
