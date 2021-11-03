@@ -106,7 +106,7 @@ export class ProducerService {
     await this.repository.save(producerFound);
   }
 
-  async cpfCnpjExists(cpfCnpj: string): Promise<void> {
+  async cpfCnpjExists(cpfCnpj: number): Promise<void> {
     const producerFound = await this.repository.findProducerByCpfCnpj(cpfCnpj);
     if (producerFound) {
       throw new ConflictException('CpfCnpj is already in use');

@@ -5,8 +5,8 @@ import { Farm } from '../farm/farm.entity';
 @Entity()
 @Unique(['cpfCnpj'])
 export class Producer extends EntityAbstract {
-  @Column({ nullable: false, type: 'varchar', length: 14 })
-  cpfCnpj: string;
+  @Column({ nullable: false, type: 'bigint' })
+  cpfCnpj: number;
 
   @Column({ nullable: false, type: 'varchar', length: 180 })
   name: string;

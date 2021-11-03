@@ -272,7 +272,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"cpfCnpj\": \"09385103000191\",\n    \"name\": \"Produtor 1\",\n    \"city\": \"Natal\",\n    \"state\": \"RN\",\n    \"farms\": [\n        {\n            \"name\": \"farm 1\",\n            \"city\": \"Natal\",\n            \"state\": \"RN\",\n            \"totalArea\": \"100.00\",\n            \"totalAreaArable\": \"12871\",\n            \"totalAreaVegetation\": \"182812\",\n            \"culturePlanted\": [\n                \"SOJA\",\n                \"MILHO\"\n            ]\n        }\n    ]\n}",
+							"raw": "{\n    \"cpfCnpj\": \"09385103030191\",\n    \"name\": \"Produtor 1\",\n    \"city\": \"Natal\",\n    \"state\": \"RN\",\n    \"farms\": [\n        {\n            \"name\": \"farm 1\",\n            \"city\": \"Natal\",\n            \"state\": \"RN\",\n            \"totalArea\": 100,\n            \"totalAreaArable\": 50,\n            \"totalAreaVegetation\": 50,\n            \"culturePlanted\": [\n                \"SOJA\",\n                \"MILHO\"\n            ]\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -298,7 +298,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"cpfCnpj\": \"97743533000128\",\n    \"name\": \"Produtor 1\",\n    \"city\": \"Natal\",\n    \"state\": \"RN\",\n    \"farms\": [\n        {\n            \"name\": \"farm 1\",\n            \"city\": \"Natal\",\n            \"state\": \"RN\",\n            \"totalArea\": \"100.00\",\n            \"totalAreaArable\": \"12871\",\n            \"totalAreaVegetation\": \"182812\",\n            \"culturePlanted\": [\n                \"SOJA\",\n                \"MILHO\"\n            ]\n        },\n        {\n            \"name\": \"farm 2\",\n            \"city\": \"São Paulo\",\n            \"state\": \"SP\",\n            \"totalArea\": \"1010.00\",\n            \"totalAreaArable\": \"12871\",\n            \"totalAreaVegetation\": \"182812\",\n            \"culturePlanted\": [\n                \"SOJA\"\n            ]\n        }\n    ]\n}",
+							"raw": "{\n    \"cpfCnpj\": 97743533000128,\n    \"name\": \"Produtor 1\",\n    \"city\": \"Natal\",\n    \"state\": \"RN\",\n    \"farms\": [\n        {\n            \"name\": \"farm 1\",\n            \"city\": \"Natal\",\n            \"state\": \"RN\",\n            \"totalArea\": 182812,\n            \"totalAreaArable\": 100,\n            \"totalAreaVegetation\": 3000,\n            \"culturePlanted\": [\n                \"SOJA\",\n                \"MILHO\"\n            ]\n        },\n        {\n            \"name\": \"farm 2\",\n            \"city\": \"São Paulo\",\n            \"state\": \"SP\",\n            \"totalArea\": 1010,\n            \"totalAreaArable\": 950,\n            \"totalAreaVegetation\": 10,\n            \"culturePlanted\": [\n                \"SOJA\"\n            ]\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -325,7 +325,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n   \"city\": \"São Paulo\",\n   \"state\": \"SP\",\n   \"farms\": [\n        {\n            \"name\": \"farm 1\",\n            \"city\": \"Natal\",\n            \"state\": \"RN\",\n            \"totalArea\": \"100.00\",\n            \"totalAreaArable\": \"12871\",\n            \"totalAreaVegetation\": \"182812\",\n            \"culturePlanted\": [\n                \"SOJA\",\n                \"MILHO\"\n            ]\n        }\n    ]\n}",
+							"raw": "{\n   \"city\": \"São Paulo\",\n   \"state\": \"SP\",\n   \"farms\": [\n        {\n            \"name\": \"farm 1\",\n            \"city\": \"Natal\",\n            \"state\": \"RN\",\n            \"totalArea\": 1000,\n            \"totalAreaArable\": 128,\n            \"totalAreaVegetation\": 50,\n            \"culturePlanted\": [\n                \"SOJA\",\n                \"MILHO\"\n            ]\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -371,7 +371,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImZhZGU1ZmM1LTM2ZTItNDhhZC05YjgwLWYyOGFmNDJjMTk2NCIsImlhdCI6MTYzNTg4MTE0MCwiZXhwIjoxNjM1ODk5MTQwfQ.V0lOzRUfT7tCnJspLvXMLKwRNtMvUM23OGqBTQzxlwg",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImZhZGU1ZmM1LTM2ZTItNDhhZC05YjgwLWYyOGFmNDJjMTk2NCIsImlhdCI6MTYzNTk0MTczMCwiZXhwIjoxNjM1OTU5NzMwfQ.YT3GaibeBLLgmaO9Rg7P_vFb1_p0PAfnRPhDnUhe0iU",
 				"type": "string"
 			}
 		]

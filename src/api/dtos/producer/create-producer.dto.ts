@@ -16,7 +16,7 @@ export class CreateProducerDto {
     message: 'The cpfCnpj address must be less than 14 characters',
   })
   @Matches(/^\d{11}$|^\d{14}$/, { message: 'Enter an cpfCnpj valid' })
-  cpfCnpj: string;
+  cpfCnpj: number;
 
   @ApiProperty({ required: true, description: 'Nome do produtor' })
   @IsNotEmpty({ message: 'Enter the producer name' })

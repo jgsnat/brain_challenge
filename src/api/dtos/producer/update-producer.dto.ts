@@ -11,7 +11,7 @@ export class UpdateProducerDto {
   })
   @Matches(/^\d{11}$|^\d{14}$/, { message: 'Enter an cpfCnpj valid' })
   @IsOptional()
-  cpfCnpj: string;
+  cpfCnpj: number;
 
   @ApiProperty({
     required: true,

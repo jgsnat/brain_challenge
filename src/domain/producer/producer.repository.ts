@@ -36,7 +36,7 @@ export class ProducerRepository extends Repository<Producer> {
     return { list: producers, total };
   }
 
-  async findProducerByCpfCnpj(cpfCnpj: string): Promise<Producer> {
+  async findProducerByCpfCnpj(cpfCnpj: number): Promise<Producer> {
     const query = this.createQueryBuilder('producer');
     query.where('producer.cpfCnpj = :cpfCnpj', { cpfCnpj });
     return query.getOne();
