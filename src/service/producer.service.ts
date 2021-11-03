@@ -92,7 +92,7 @@ export class ProducerService {
       if (farms.length > 0) {
         await this.farmService.updateFarms(producerFound, farms);
       } else {
-        throw new UnprocessableEntityException('Passwords do not match');
+        throw new UnprocessableEntityException('Farms cannot be empty');
       }
     }
     producerFound.farms = farms;
@@ -106,7 +106,7 @@ export class ProducerService {
     await this.repository.save(producerFound);
   }
 
-  async cpfCnpjExists(cpfCnpj: number): Promise<void> {
+  private async cpfCnpjExists(cpfCnpj: number): Promise<void> {
     const producerFound = await this.repository.findProducerByCpfCnpj(cpfCnpj);
     if (producerFound) {
       throw new ConflictException('CpfCnpj is already in use');
