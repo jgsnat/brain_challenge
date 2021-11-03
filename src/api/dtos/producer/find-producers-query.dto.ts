@@ -5,6 +5,7 @@ export class FindProducersQueryDto extends BaseQueryParametersDto {
   @ApiProperty({
     required: false,
     description: 'CPF ou CNPJ do produtor',
+    pattern: '^\\d{11}$|^\\d{14}$',
   })
   cpfCnpj: string;
 

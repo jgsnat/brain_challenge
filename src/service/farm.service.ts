@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FarmRepository } from '../domain/farm/farm.repository';
 
@@ -50,6 +50,20 @@ export class FarmService {
     const farms = await this.repository.findAllByProducer(producer);
     for (const farm of farms) {
       await this.repository.remove(farm);
+    }
+  }
+
+  public async validationTotalArea(farms): Promise<void> {
+    if (farms.length > 0) {
+      for (const farm of farms) {
+        const { totalArea, totalAreaArable, totalAreaVegetation } = farm;
+        const availableArea = totalAreaArable + totalAreaVegetation;
+        if (availableArea > totalArea) {
+          throw new UnprocessableEntityException(
+            'The sum of arable area and vegetation should not be greater than the total area of the farm',
+          );
+        }
+      }
     }
   }
 }

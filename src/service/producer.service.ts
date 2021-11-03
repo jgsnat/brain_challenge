@@ -39,6 +39,7 @@ export class ProducerService {
   async create(params): Promise<Producer> {
     await this.cpfCnpjExists(params.cpfCnpj);
     const { cpfCnpj, name, city, state, farms } = params;
+    await this.farmService.validationTotalArea(farms);
     const producer = this.repository.create();
     producer.cpfCnpj = cpfCnpj;
     producer.name = name;
@@ -54,6 +55,7 @@ export class ProducerService {
   async updateFull(id: number, params): Promise<Producer> {
     const producerFound = await this.findById(id);
     const { cpfCnpj, name, city, state, farms } = params;
+    await this.farmService.validationTotalArea(farms);
     producerFound.cpfCnpj = cpfCnpj;
     producerFound.name = name;
     producerFound.city = city;
@@ -68,6 +70,7 @@ export class ProducerService {
   async updateIncremental(id: number, params): Promise<Producer> {
     const producerFound = await this.findById(id);
     const { cpfCnpj, name, city, state, farms } = params;
+    await this.farmService.validationTotalArea(farms);
     if (cpfCnpj) {
       producerFound.cpfCnpj = cpfCnpj;
     }

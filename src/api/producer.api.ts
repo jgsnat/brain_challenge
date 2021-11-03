@@ -78,6 +78,11 @@ export class ProducerApi {
     status: 409,
     description: 'Retorna caso seja passado um e-mail já cadastrado na base',
   })
+  @ApiResponse({
+    status: 422,
+    description:
+      'Retorna caso a área total seja inferior a soma das áreas agricultável e área de vegetação',
+  })
   @ApiOperation({ description: 'Criação de produtores' })
   async create(
     @Body(ValidationPipe) producerDto: CreateProducerDto,
@@ -97,6 +102,11 @@ export class ProducerApi {
     status: 404,
     description:
       'Retorna caso não seja encontrado nenhum recurso com os parâmetros passados',
+  })
+  @ApiResponse({
+    status: 422,
+    description:
+      'Retorna caso a área total seja inferior a soma das áreas agricultável e área de vegetação',
   })
   @ApiOperation({ description: 'Atualização de todos os dados de um produtor' })
   async fullUpdate(
@@ -118,6 +128,11 @@ export class ProducerApi {
     status: 404,
     description:
       'Retorna caso não seja encontrado nenhum recurso com os parâmetros passados',
+  })
+  @ApiResponse({
+    status: 422,
+    description:
+      'Retorna caso a área total seja inferior a soma das áreas agricultável e área de vegetação',
   })
   @ApiOperation({
     description: 'Atualização de informações passadas para um produtor',

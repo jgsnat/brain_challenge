@@ -1,9 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
+import { IsNotEmpty, Matches, MaxLength, MinLength } from 'class-validator';
 import { CreateFarmDto } from './create-farm.dto';
 
 export class CreateProducerDto {
-  @ApiProperty({ required: true, description: 'CPF ou CNPJ do produtor' })
+  @ApiProperty({
+    required: true,
+    description: 'CPF ou CNPJ do produtor',
+    pattern: '^\\d{11}$|^\\d{14}$',
+  })
   @IsNotEmpty({ message: 'Enter an cpfCnpj address' })
   @MinLength(11, {
     message: 'The cpfCnpj address must have at least 11 characters',
@@ -11,6 +15,7 @@ export class CreateProducerDto {
   @MaxLength(14, {
     message: 'The cpfCnpj address must be less than 14 characters',
   })
+  @Matches(/^\d{11}$|^\d{14}$/, { message: 'Enter an cpfCnpj valid' })
   cpfCnpj: string;
 
   @ApiProperty({ required: true, description: 'Nome do produtor' })

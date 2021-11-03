@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional } from 'class-validator';
+import { IsOptional, Matches } from 'class-validator';
 import { CreateFarmDto } from './create-farm.dto';
 
 export class UpdateProducerDto {
@@ -7,7 +7,9 @@ export class UpdateProducerDto {
     required: true,
     description: 'CPF ou CNPJ do produtor',
     nullable: true,
+    pattern: '^\\d{11}$|^\\d{14}$',
   })
+  @Matches(/^\d{11}$|^\d{14}$/, { message: 'Enter an cpfCnpj valid' })
   @IsOptional()
   cpfCnpj: string;
 
